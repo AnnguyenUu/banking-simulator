@@ -32,10 +32,12 @@ const PageLayout = (props: Props) => {
 
   }, [titleRender, actions])
   return (
-    <Flex vertical gap={GAP.SMALL}>
+    <div className="max-w-[1600px] m-auto">
+      <Flex vertical gap={GAP.SMALL}>
       {header}
       {children}
     </Flex>
+    </div>
   );
 };
 
