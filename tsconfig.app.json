@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    "types": ["vitest/globals"],
+
+    "paths": {
+      "@api": ["./src/api"],
+      "@api/*": ["./src/api/*"],
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+      "@mutations": ["./src/mutations"],
+      "@mutations/*": ["./src/mutations/*"],
+      "@pages": ["./src/pages"],
+      "@pages/*": ["./src/pages/*"],
+      "@queries": ["./src/queries"],
+      "@queries/*": ["./src/queries/*"],
+      "@routes": ["./src/routes"],
+      "@routes/*": ["./src/routes/*"],
+      "@store": ["./src/store"],
+      "@store/*": ["./src/store/*"],
+      "@test": ["./src/test"],
+      "@test/*": ["./src/test/*"],
+      "@apptypes": ["./src/types"],
+      "@apptypes/*": ["./src/types/*"],
+      "@utils": ["./src/utils"],
+      "@utils/*": ["./src/utils/*"],
+      "@context": ["./src/context"],
+      "@context/*": ["./src/context/*"],
+    }
+  },
+  "include": ["src"]
+}
