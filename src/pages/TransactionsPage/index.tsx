@@ -37,10 +37,6 @@ export function TransactionsPage() {
       const accountTxs = (transactions ?? []).filter(
         (t) => t.accountId === account.id,
       );
-      console.log({
-        accountTxs,
-        account
-      })
       for (const tx of withRunningBalance(account, accountTxs)) {
         balances.set(tx.id, tx.balanceAfter);
       }
