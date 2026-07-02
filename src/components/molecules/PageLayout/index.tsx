@@ -7,36 +7,35 @@ import Space from "@components/atomic/Space";
 interface Props {
   title: React.ReactNode;
   children: React.ReactNode;
-  actions?: React.ReactNode
+  actions?: React.ReactNode;
 }
 
 const PageLayout = (props: Props) => {
   const { title, children, actions } = props;
 
   const titleRender = useMemo(() => {
-    if(typeof title === "string" || typeof title === "number") {
-      return <Typography.Title level={3}>
-        {title}
-      </Typography.Title>
+    if (typeof title === "string" || typeof title === "number") {
+      return <Typography.Title level={3}>{title}</Typography.Title>;
     }
 
-    return title
-  }, [title])
+    return title;
+  }, [title]);
 
   const header = useMemo(() => {
-    if(!actions) return titleRender
-    return <Space className="mb-4 w-full justify-between" wrap>
-      {titleRender}
-      {actions}
-    </Space>
-
-  }, [titleRender, actions])
+    if (!actions) return <div className="mb-4">{titleRender}</div>;
+    return (
+      <Space className="mb-4 w-full justify-between" wrap>
+        {titleRender}
+        {actions}
+      </Space>
+    );
+  }, [titleRender, actions]);
   return (
     <div className="max-w-[1600px] m-auto">
       <Flex vertical gap={GAP.SMALL}>
-      {header}
-      {children}
-    </Flex>
+        {header}
+        {children}
+      </Flex>
     </div>
   );
 };

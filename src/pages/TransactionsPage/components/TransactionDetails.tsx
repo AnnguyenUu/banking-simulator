@@ -1,4 +1,4 @@
-import type { Account, Transaction } from "@apptypes/banking";
+import type { Transaction } from "@apptypes/banking";
 import Descriptions from "@components/atomic/Descriptions";
 import Drawer from "@components/atomic/Drawer";
 import Tag from "@components/atomic/Tag";
@@ -8,25 +8,14 @@ import { getAmountIndicator } from "@utils/getAmountIndicator";
 import { memo, useMemo } from "react";
 
 interface Props {
-  transaction:
-    | {
-        transaction: Transaction;
-        account: undefined;
-        balanceAfter: undefined;
-      }
-    | {
-        transaction: Transaction;
-        account: Account;
-        balanceAfter: number | undefined;
-      }
-    | null;
+  transaction: Transaction | null;
   onClose: () => void;
   title: string;
 }
 
 const TransactionDetails = ({ transaction, onClose, title }: Props) => {
   const selectedTxAmount = transaction
-    ? getAmountIndicator(transaction.transaction.amount)
+    ? getAmountIndicator(transaction.amount)
     : null;
 
   const items = useMemo(() => {
@@ -36,35 +25,29 @@ const TransactionDetails = ({ transaction, onClose, title }: Props) => {
       {
         key: "description",
         label: "Description",
-        children: transaction.transaction.description,
+        children: transaction.description,
       },
       {
         key: "account",
         label: "Account",
-        children: transaction.account?.name ?? "—",
+        children: transaction.accountName,
       },
       {
         key: "date",
         label: "Date",
-        children: transaction.transaction.date,
+        children: transaction.date,
       },
       {
         key: "category",
         label: "Category",
-        children: <Tag>{transaction.transaction.category}</Tag>,
+        children: <Tag>{transaction.category}</Tag>,
       },
       {
         key: "status",
         label: "Status",
         children: (
-          <Tag
-            color={
-              transaction.transaction.status === "completed"
-                ? "green"
-                : "gold"
-            }
-          >
-            {transaction.transaction.status}
+          <Tag color={transaction.status === "completed" ? "green" : "gold"}>
+            {transaction.status}
           </Tag>
         ),
       },
@@ -74,17 +57,14 @@ const TransactionDetails = ({ transaction, onClose, title }: Props) => {
         children: (
           <Typography.Text className={selectedTxAmount?.className}>
             {selectedTxAmount?.prefix}
-            {formatCurrency(transaction.transaction.amount)}
+            {formatCurrency(transaction.amount)}
           </Typography.Text>
         ),
       },
       {
         key: "balanceAfter",
         label: "Balance After",
-        children:
-          transaction.balanceAfter === undefined
-            ? "—"
-            : formatCurrency(transaction.balanceAfter),
+        children: formatCurrency(transaction.balanceAfter),
       },
     ];
   }, [transaction, selectedTxAmount]);

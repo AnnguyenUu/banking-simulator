@@ -1,23 +1,35 @@
-export type AccountStatus = 'active' | 'frozen' | 'closed';
+export type AccountStatus = "active" | "frozen" | "closed";
 
 export interface Account {
   id: string;
   name: string;
-  type: 'checking' | 'savings' | 'credit';
+  type: "checking" | "savings" | "credit";
   balance: number;
   currency: string;
   accountNumber: string;
   status: AccountStatus;
 }
 
+export type GetTransactionPayload = {
+  page: number;
+  perPage: number;
+} & Partial<{
+  accountId: string;
+  description: string;
+  category: string;
+  search: string
+}>;
+
 export interface Transaction {
   id: string;
   accountId: string;
+  accountName: string;
   date: string;
   description: string;
   category: string;
   amount: number;
-  status: 'completed' | 'pending';
+  status: "completed" | "pending";
+  balanceAfter: number
 }
 
 export interface User {
@@ -37,4 +49,11 @@ export interface TransferResult {
   fromAccount: Account;
   toAccount: Account;
   transactions: [Transaction, Transaction];
+}
+
+export interface TransferFormValues {
+  fromAccountId: string;
+  toAccountId: string;
+  amount: number;
+  note?: string;
 }

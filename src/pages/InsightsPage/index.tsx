@@ -20,7 +20,7 @@ import { useTransactions } from '@queries';
 const CATEGORY_COLORS = ['#1d39c4', '#08979c', '#d4380d', '#d48806', '#389e0d', '#9254de', '#c41d7f'];
 
 export function InsightsPage() {
-  const { data: transactions, isLoading } = useTransactions();
+  const { transactions, isLoading } = useTransactions();
 
   const spendingTransactions = useMemo(
     () => (transactions ?? []).filter((tx) => tx.category !== 'Transfer'),

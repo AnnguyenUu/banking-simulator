@@ -31,7 +31,7 @@ describe('TransferPage', () => {
     await user.click(screen.getByRole('button', { name: 'Transfer' }));
 
     expect(await screen.findByText('Transfer complete')).toBeInTheDocument();
-    expect(screen.getByText(/new balance: \$4131\.55/)).toBeInTheDocument();
-    expect(screen.getByText(/new balance: \$18442\.10/)).toBeInTheDocument();
+    expect(screen.getByText(/new balance: \$4,131\.55/)).toBeInTheDocument();
+    expect(screen.getByText(/new balance: \$18,442\.10/)).toBeInTheDocument();
   });
 });

@@ -1,6 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetchAccounts } from '@api/banking';
+import { useQuery } from "@tanstack/react-query";
+import { fetchAccounts } from "@api/banking";
 
 export function useAccounts() {
-  return useQuery({ queryKey: ['accounts'], queryFn: fetchAccounts });
+  const query = useQuery({ queryKey: ["accounts"], queryFn: fetchAccounts });
+  return {
+    ...query,
+    accounts: query?.data?.data || [],
+  };
 }
