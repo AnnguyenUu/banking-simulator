@@ -6,11 +6,9 @@ import { getAmountIndicator } from "@utils/getAmountIndicator";
 import type { ColumnsType } from "antd/es/table";
 
 export const getTransactionColumns = ({
-  selectedAccountId,
   accountLookup,
   balanceByTxId,
 }: {
-  selectedAccountId: string | null;
   accountLookup: Map<string, Account>;
   balanceByTxId: Map<string, number>;
 }): ColumnsType<Transaction> => [
@@ -51,17 +49,13 @@ export const getTransactionColumns = ({
       );
     },
   },
-  ...(selectedAccountId
-    ? [
-        {
-          title: "Balance After",
-          key: "balanceAfter",
-          align: "right" as const,
-          render: (_: unknown, tx: Transaction) => {
-            const balance = balanceByTxId.get(tx.id);
-            return balance === undefined ? "—" : formatCurrency(balance);
-          },
-        },
-      ]
-    : []),
+  {
+    title: "Balance After",
+    key: "balanceAfter",
+    align: "right" as const,
+    render: (_: unknown, tx: Transaction) => {
+      const balance = balanceByTxId.get(tx.id);
+      return balance === undefined ? "—" : formatCurrency(balance);
+    },
+  },
 ];

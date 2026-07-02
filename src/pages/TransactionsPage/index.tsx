@@ -32,20 +32,21 @@ export function TransactionsPage() {
   );
 
   const balanceByTxId = useMemo(() => {
-    const account = selectedAccountId
-      ? accountLookup.get(selectedAccountId)
-      : undefined;
-    if (!account) return new Map<string, number>();
-    const accountTxs = (transactions ?? []).filter(
-      (t) => t.accountId === account.id,
-    );
-    return new Map(
-      withRunningBalance(account, accountTxs).map((tx) => [
-        tx.id,
-        tx.balanceAfter,
-      ]),
-    );
-  }, [transactions, selectedAccountId, accountLookup]);
+    const balances = new Map<string, number>();
+    for (const account of accounts ?? []) {
+      const accountTxs = (transactions ?? []).filter(
+        (t) => t.accountId === account.id,
+      );
+      console.log({
+        accountTxs,
+        account
+      })
+      for (const tx of withRunningBalance(account, accountTxs)) {
+        balances.set(tx.id, tx.balanceAfter);
+      }
+    }
+    return balances;
+  }, [transactions, accounts]);
 
   const filteredTransactions = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -78,13 +79,8 @@ export function TransactionsPage() {
   }, [selectedTx, transactions, accountLookup]);
 
   const columns = useMemo(
-    () =>
-      getTransactionColumns({
-        selectedAccountId,
-        accountLookup,
-        balanceByTxId,
-      }),
-    [selectedAccountId, accountLookup, balanceByTxId],
+    () => getTransactionColumns({ accountLookup, balanceByTxId }),
+    [accountLookup, balanceByTxId],
   );
   
   const onSearch = (value: string) => {
