@@ -25,7 +25,6 @@ export function TransferPage() {
   const handleSubmit = (values: TransferFormValues) => {
     transfer(values, {
       onSuccess: onSuccess,
-      onSettled: onReset,
     });
   };
 

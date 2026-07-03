@@ -1,6 +1,6 @@
 import type { TransferFormValues, TransferResult } from "@apptypes/transfers";
 import { useAccounts } from "@queries";
-import { Form } from "antd";
+import { Form, message } from "antd";
 import { useState } from "react";
 
 export const useTransferForm = () => {
@@ -27,8 +27,13 @@ export const useTransferForm = () => {
   const onReset = () => setResult(null);
 
   const onSuccess = (data: TransferResult) => {
+    debugger
     setResult(data);
     form.resetFields();
+    message.open({
+      type: "success",
+      content: "Transfer successfully",
+    });
   };
 
   return {
