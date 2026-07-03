@@ -1,6 +1,7 @@
-import type { TransferFormValues } from "@apptypes/transfers";
+import type { TransferFormValues, TransferResult } from "@apptypes/transfers";
 import { useAccounts } from "@queries";
 import { Form } from "antd";
+import { useState } from "react";
 
 export const useTransferForm = () => {
   const { accounts } = useAccounts();
@@ -8,8 +9,11 @@ export const useTransferForm = () => {
   const [form] = Form.useForm<TransferFormValues>();
 
   const fromAccountId = Form.useWatch("fromAccountId", form);
+
   const toAccountId = Form.useWatch("toAccountId", form);
+
   const amount = Form.useWatch("amount", form);
+
   const note = Form.useWatch("note", form);
 
   const activeAccounts =
@@ -18,12 +22,28 @@ export const useTransferForm = () => {
   const fromAccount = accounts?.find((account) => account.id === fromAccountId);
   const toAccount = accounts?.find((account) => account.id === toAccountId);
 
+  const [result, setResult] = useState<TransferResult | null>(null);
+
+  const onReset = () => setResult(null);
+
+  const onSuccess = (data: TransferResult) => {
+    setResult(data);
+    form.resetFields();
+  };
+
   return {
-    fromAccount,
-    toAccount,
-    amount,
-    note,
-    activeAccounts,
-    form
-  }
-}
+    view: {
+      fromAccount,
+      toAccount,
+      amount,
+      note,
+      activeAccounts,
+      form,
+      result,
+    },
+    action: {
+      onReset,
+      onSuccess,
+    },
+  };
+};

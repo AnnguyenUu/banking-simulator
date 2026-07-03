@@ -1,10 +1,6 @@
-import { lazy, useState } from "react";
+import { lazy } from "react";
 import { useTransferFunds } from "@mutations";
-import type {
-  TransferFormValues,
-  TransferRequest,
-  TransferResult,
-} from "@apptypes/transfers";
+import type { TransferFormValues, TransferResult } from "@apptypes/transfers";
 import PageLayout from "@components/molecules/PageLayout";
 import Card from "@components/atomic/Card";
 import Row from "@components/atomic/Row";
@@ -17,23 +13,19 @@ const ResultTransfer = lazy(() => import("./components/ResultTransfer"));
 const TransferForm = lazy(() => import("./components/TransferForm"));
 
 export function TransferPage() {
-  const { form, activeAccounts, fromAccount, toAccount, amount, note } =
-    useTransferForm();
+  const { view, action } = useTransferForm();
+
+  const { form, activeAccounts, fromAccount, toAccount, amount, note, result } =
+    view;
+
+  const { onReset, onSuccess } = action;
 
   const { transfer, isPending, isError } = useTransferFunds();
 
-  const [result, setResult] = useState<TransferResult | null>(null);
-
-  const onReset = () => setResult(null);
-
   const handleSubmit = (values: TransferFormValues) => {
-    onReset();
-
     transfer(values, {
-      onSuccess: (data) => {
-        setResult(data);
-        form.resetFields();
-      },
+      onSuccess: onSuccess,
+      onSettled: onReset,
     });
   };
 
