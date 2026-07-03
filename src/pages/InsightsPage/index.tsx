@@ -14,7 +14,10 @@ const TopMerchants = lazy(() => import("./components/TopMerchants"));
 const chartFallback = <Skeleton active paragraph={{ rows: 6 }} />;
 
 export function InsightsPage() {
-  const { transactions, isLoading } = useTransactions();
+  const { transactions, isLoading } = useTransactions({
+    page: 1,
+    perPage: 100
+  });
 
   const {
     spendingByCategory,
