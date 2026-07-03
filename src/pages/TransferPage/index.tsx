@@ -7,13 +7,18 @@ import type {
 } from "@apptypes/transfers";
 import PageLayout from "@components/molecules/PageLayout";
 import Card from "@components/atomic/Card";
+import Row from "@components/atomic/Row";
+import Col from "@components/atomic/Col";
+import { GAP } from "@context/design-tokens";
 import { useTransferForm } from "./hooks/useTransferForm";
+import TransferSummary from "./components/TransferSummary";
 
 const ResultTransfer = lazy(() => import("./components/ResultTransfer"));
 const TransferForm = lazy(() => import("./components/TransferForm"));
 
 export function TransferPage() {
-  const { form, activeAccounts, fromAccount } = useTransferForm();
+  const { form, activeAccounts, fromAccount, toAccount, amount, note } =
+    useTransferForm();
 
   const [result, setResult] = useState<TransferResult | null>(null);
 
@@ -42,17 +47,29 @@ export function TransferPage() {
 
   return (
     <PageLayout title="Transfer Funds">
-      <Card className="max-w-[480px]">
-        <TransferForm
-          activeAccounts={activeAccounts || []}
-          fromAccount={fromAccount}
-          isPending={isPending}
-          isError={isError}
-          form={form}
-          layout="vertical"
-          onFinish={handleSubmit}
-        />
-      </Card>
+      <Row gutter={[GAP.LARGE, GAP.LARGE]}>
+        <Col xs={24} md={14}>
+          <Card className="h-full">
+            <TransferForm
+              activeAccounts={activeAccounts || []}
+              fromAccount={fromAccount}
+              isPending={isPending}
+              isError={isError}
+              form={form}
+              layout="vertical"
+              onFinish={handleSubmit}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} md={10}>
+          <TransferSummary
+            fromAccount={fromAccount}
+            toAccount={toAccount}
+            amount={amount}
+            note={note}
+          />
+        </Col>
+      </Row>
     </PageLayout>
   );
 }

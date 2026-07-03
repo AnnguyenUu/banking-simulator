@@ -43,8 +43,10 @@ const TransferForm = ({
         />
       </Form.Item>
 
-      <Flex justify="center" className="text-gray-400 -my-1">
-        <ArrowDownOutlined />
+      <Flex justify="center" className="-my-1">
+        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1d39c4]/10 text-[#1d39c4]">
+          <ArrowDownOutlined />
+        </div>
       </Flex>
 
       <Form.Item
