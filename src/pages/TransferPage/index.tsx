@@ -4,7 +4,7 @@ import type {
   TransferFormValues,
   TransferRequest,
   TransferResult,
-} from "@apptypes/banking";
+} from "@apptypes/transfers";
 import PageLayout from "@components/molecules/PageLayout";
 import Card from "@components/atomic/Card";
 import { useTransferForm } from "./hooks/useTransferForm";
@@ -19,6 +19,8 @@ export function TransferPage() {
 
   const onReset = () => setResult(null);
 
+  const { transfer, isPending, isError } = useTransferFunds();
+
   const handleSubmit = (values: TransferFormValues) => {
     onReset();
 
@@ -26,7 +28,7 @@ export function TransferPage() {
       ...values,
     };
 
-    mutation.mutate(request, {
+    transfer(request, {
       onSuccess: (data) => {
         setResult(data);
         form.resetFields();
@@ -34,14 +36,8 @@ export function TransferPage() {
     });
   };
 
-  const mutation = useTransferFunds();
-
   if (result) {
-    return (
-      <PageLayout title="Transfer Funds">
-        <ResultTransfer result={result} onClick={onReset} />
-      </PageLayout>
-    );
+    return <AlertTransferSuccess result={result} onClick={onReset} />;
   }
 
   return (
@@ -50,8 +46,8 @@ export function TransferPage() {
         <TransferForm
           activeAccounts={activeAccounts || []}
           fromAccount={fromAccount}
-          isPending={mutation.isPending}
-          isError={mutation.isError}
+          isPending={isPending}
+          isError={isError}
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
@@ -60,3 +56,17 @@ export function TransferPage() {
     </PageLayout>
   );
 }
+
+const AlertTransferSuccess = ({
+  result,
+  onClick,
+}: {
+  result: TransferResult;
+  onClick: () => void;
+}) => {
+  return (
+    <PageLayout title="Transfer Funds">
+      <ResultTransfer result={result} onClick={onClick} />
+    </PageLayout>
+  );
+};

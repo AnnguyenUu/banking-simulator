@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchTransactions } from "@api/banking";
-import type { GetTransactionPayload } from "@apptypes/banking";
+import { fetchTransactions } from "@api/requests/transactions";
+import type { GetTransactionPayload } from "@apptypes/transactions";
 import { TRANSACTIONS_KEYS } from "@context/query-keys";
 
 export function useTransactions(params?: GetTransactionPayload) {

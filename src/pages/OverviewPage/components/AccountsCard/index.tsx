@@ -1,4 +1,4 @@
-import type { Account, AccountStatus } from "@apptypes/banking";
+import type { Account, AccountStatus } from "@apptypes/accounts";
 import Card from "@components/atomic/Card";
 import Col from "@components/atomic/Col";
 import Empty from "@components/atomic/Empty";
@@ -34,13 +34,7 @@ const statusColors: Record<AccountStatus, string> = {
 
 const AccountsCard = ({ loading, accounts }: Props) => {
   if (loading) {
-    return (
-      <Row gutter={[GAP.LARGE, GAP.LARGE]}>
-        <Col span={24}>
-          <Skeleton active />
-        </Col>
-      </Row>
-    );
+    return <CardLoading />;
   }
 
   if ((accounts || []).length === 0) {
@@ -54,6 +48,16 @@ const AccountsCard = ({ loading, accounts }: Props) => {
           <AccountCard account={account} />
         </Col>
       ))}
+    </Row>
+  );
+};
+
+const CardLoading = () => {
+  return (
+    <Row gutter={[GAP.LARGE, GAP.LARGE]}>
+      <Col span={24}>
+        <Skeleton active />
+      </Col>
     </Row>
   );
 };

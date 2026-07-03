@@ -1,4 +1,5 @@
-import type { Account, TransferFormValues } from "@apptypes/banking";
+import type { Account } from "@apptypes/accounts";
+import type { TransferFormValues } from "@apptypes/transfers";
 import Flex from "@components/atomic/Flex";
 import Select from "@components/atomic/Select";
 import { formatCurrency } from "@utils/formatCurrency";

@@ -1,4 +1,4 @@
-import type { MenuItem } from "@apptypes/banking";
+import type { MenuItem } from "@apptypes/user";
 import type { ItemType } from "antd/es/menu/interface";
 import {
   DashboardOutlined,

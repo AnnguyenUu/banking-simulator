@@ -1,7 +1,7 @@
 import { lazy, startTransition, useMemo, useState } from "react";
 import { useAccounts, useTransactions } from "@queries";
 import { useSessionStore } from "@store/useSessionStore";
-import type { Transaction } from "@apptypes/banking";
+import type { Transaction } from "@apptypes/transactions";
 import { getTransactionColumns } from "./components/getTransactionColumns";
 import PageLayout from "@components/molecules/PageLayout";
 import Space from "@components/atomic/Space";

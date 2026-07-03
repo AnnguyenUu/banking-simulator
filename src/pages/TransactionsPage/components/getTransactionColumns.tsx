@@ -1,4 +1,4 @@
-import type { Transaction } from "@apptypes/banking";
+import type { Transaction } from "@apptypes/transactions";
 import Tag from "@components/atomic/Tag";
 import Typography from "@components/atomic/Typography";
 import { formatCurrency } from "@utils/formatCurrency";

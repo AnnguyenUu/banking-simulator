@@ -1,4 +1,4 @@
-import type { Transaction } from "@apptypes/banking";
+import type { Transaction } from "@apptypes/transactions";
 import Card from "@components/atomic/Card";
 import Empty from "@components/atomic/Empty";
 import Flex from "@components/atomic/Flex";

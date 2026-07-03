@@ -15,13 +15,9 @@ const BalanceCard = (props: Props) => {
   const { loading, totalBalance, accountsLength } = props;
 
   if (loading) {
-    return (
-      <Card>
-        <Skeleton active paragraph={false} />
-      </Card>
-    );
+    return <CardLoading />;
   }
-  
+
   return (
     <Card>
       <Statistic
@@ -32,6 +28,14 @@ const BalanceCard = (props: Props) => {
       <Typography.Text type="secondary">
         Across {accountsLength} accounts
       </Typography.Text>
+    </Card>
+  );
+};
+
+const CardLoading = () => {
+  return (
+    <Card>
+      <Skeleton active />
     </Card>
   );
 };

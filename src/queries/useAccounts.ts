@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchAccounts } from "@api/banking";
+import { fetchAccounts } from "@api/requests/accounts";
 import { ACCOUNT_QUERY_KEY } from "@context/query-keys";
 
 export function useAccounts() {

@@ -1,4 +1,4 @@
-import type { Account } from '@apptypes/banking';
+import type { Account } from '@apptypes/accounts';
 
 interface DatedTransaction {
   id: string;

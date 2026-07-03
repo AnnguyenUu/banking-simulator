@@ -1,4 +1,4 @@
-import type { TransferResult } from "@apptypes/banking";
+import type { TransferResult } from "@apptypes/transfers";
 import Button from "@components/atomic/Button";
 import Card from "@components/atomic/Card";
 import Result from "@components/atomic/Result";

@@ -1,4 +1,4 @@
-import type { Transaction } from "@apptypes/banking";
+import type { Transaction } from "@apptypes/transactions";
 import Descriptions from "@components/atomic/Descriptions";
 import Drawer from "@components/atomic/Drawer";
 import Tag from "@components/atomic/Tag";

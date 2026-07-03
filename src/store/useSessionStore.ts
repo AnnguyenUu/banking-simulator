@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { User } from '@apptypes/banking';
+import type { User } from '@apptypes/user';
 
 interface SessionState {
   user: User | null;

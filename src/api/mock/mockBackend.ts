@@ -1,6 +1,9 @@
 import MockAdapter from 'axios-mock-adapter';
-import { apiClient } from './client';
-import type { Account, Transaction, TransferRequest, TransferResult, User } from '@apptypes/banking';
+import { apiClient } from '../http/client';
+import type { Account } from '@apptypes/accounts';
+import type { Transaction } from '@apptypes/transactions';
+import type { TransferRequest, TransferResult } from '@apptypes/transfers';
+import type { User } from '@apptypes/user';
 import { withRunningBalance } from '@utils/runningBalance';
 
 type TransactionSeed = Omit<Transaction, 'accountName' | 'balanceAfter'>;

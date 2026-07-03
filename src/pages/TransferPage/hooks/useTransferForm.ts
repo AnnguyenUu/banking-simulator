@@ -1,4 +1,4 @@
-import type { TransferFormValues, TransferResult } from "@apptypes/banking";
+import type { TransferFormValues, TransferResult } from "@apptypes/transfers";
 import { useAccounts } from "@queries";
 import { Form } from "antd";
 import { useState } from "react";
