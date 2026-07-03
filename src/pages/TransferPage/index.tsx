@@ -20,20 +20,16 @@ export function TransferPage() {
   const { form, activeAccounts, fromAccount, toAccount, amount, note } =
     useTransferForm();
 
+  const { transfer, isPending, isError } = useTransferFunds();
+
   const [result, setResult] = useState<TransferResult | null>(null);
 
   const onReset = () => setResult(null);
 
-  const { transfer, isPending, isError } = useTransferFunds();
-
   const handleSubmit = (values: TransferFormValues) => {
     onReset();
 
-    const request: TransferRequest = {
-      ...values,
-    };
-
-    transfer(request, {
+    transfer(values, {
       onSuccess: (data) => {
         setResult(data);
         form.resetFields();

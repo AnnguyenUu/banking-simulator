@@ -64,11 +64,11 @@ const CardLoading = () => {
 
 const AccountCard = memo(({ account }: { account: Account }) => {
   const selectAccount = useSessionStore((state) => state.selectAccount);
+
   const navigate = useNavigate();
 
   const content = useMemo(() => {
     const config = getAmountIndicator(account.balance ?? 0);
-
     return config.className;
   }, [account]);
 

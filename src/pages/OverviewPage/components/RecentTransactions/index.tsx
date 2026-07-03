@@ -38,9 +38,7 @@ const RecentTransactions = ({ loading, transactions }: Props) => {
           itemLayout="vertical"
           size="small"
           renderItem={(transaction) => (
-            <List.Item>
-              <RecentTransaction transaction={transaction} />
-            </List.Item>
+            <RecentTransaction key={transaction.id} transaction={transaction} />
           )}
         />
       </Card>
@@ -51,23 +49,26 @@ const RecentTransactions = ({ loading, transactions }: Props) => {
 const RecentTransaction = memo(
   ({ transaction }: { transaction: Transaction }) => {
     return (
-      <Flex justify="space-between" align="center">
-        <div>
-          <Typography.Text strong>{transaction.description}</Typography.Text>
+      <List.Item>
+        <Flex justify="space-between" align="center">
           <div>
-            <Typography.Text type="secondary">
-              {transaction.date}
-            </Typography.Text>&nbsp;
-            <Tag>{transaction.category}</Tag>
+            <Typography.Text strong>{transaction.description}</Typography.Text>
+            <div>
+              <Typography.Text type="secondary">
+                {transaction.date}
+              </Typography.Text>
+              &nbsp;
+              <Tag>{transaction.category}</Tag>
+            </div>
           </div>
-        </div>
-        <Typography.Text
-          className={getAmountIndicator(transaction.amount)?.className}
-        >
-          {getAmountIndicator(transaction?.amount)?.prefix || ""}
-          {formatCurrency(transaction.amount)}
-        </Typography.Text>
-      </Flex>
+          <Typography.Text
+            className={getAmountIndicator(transaction.amount)?.className}
+          >
+            {getAmountIndicator(transaction?.amount)?.prefix || ""}
+            {formatCurrency(transaction.amount)}
+          </Typography.Text>
+        </Flex>
+      </List.Item>
     );
   },
 );

@@ -1,7 +1,6 @@
-import { lazy, startTransition, useMemo, useState } from "react";
+import { lazy, useMemo } from "react";
 import { useAccounts, useTransactions } from "@queries";
 import { useSessionStore } from "@store/useSessionStore";
-import type { Transaction } from "@apptypes/transactions";
 import { getTransactionColumns } from "./components/getTransactionColumns";
 import PageLayout from "@components/molecules/PageLayout";
 import Space from "@components/atomic/Space";
@@ -9,7 +8,7 @@ import Input from "@components/atomic/Input";
 import Select from "@components/atomic/Select";
 import Table from "@components/atomic/Table";
 import { useChangePage } from "../../hooks/useChangePage";
-import { useDebounceCallback } from "../../hooks/useDebounce";
+import { useGetTransactionQuery } from "./hooks/useGetTransactionQuery";
 
 const TransactionDetails = lazy(
   () => import("./components/TransactionDetails"),
@@ -22,13 +21,13 @@ export function TransactionsPage() {
 
   const { perPage, onChangeTable, page } = useChangePage();
 
-  const [search, setSearch] = useState("");
-
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const [selectedTx, setSelectedTx] = useState<Transaction | null>(null);
-
-  const debounced = useDebounceCallback(setSearchQuery, 500)
+  const {
+    onSearch,
+    search,
+    query,
+    selectedTransaction,
+    onSelectTransaction
+  } = useGetTransactionQuery()
 
   const { accounts } = useAccounts();
   
@@ -36,18 +35,10 @@ export function TransactionsPage() {
     page,
     perPage,
     accountId: selectedAccountId || "",
-    search: searchQuery,
+    search: query,
   });
 
   const columns = useMemo(() => getTransactionColumns(), []);
-
-  const onSearch = (value: string) => {
-    setSearch(value);
-
-    startTransition(() => {
-      debounced(value)
-    });
-  };
 
   return (
     <PageLayout
@@ -83,15 +74,15 @@ export function TransactionsPage() {
         pagination={{ pageSize: perPage, total: total }}
         onChange={onChangeTable}
         onRow={(tx) => ({
-          onClick: () => setSelectedTx(tx),
+          onClick: () => onSelectTransaction(tx),
           className: "cursor-pointer",
         })}
       />
 
-      {selectedTx !== null && (
+      {selectedTransaction !== null && (
         <TransactionDetails
-          transaction={selectedTx}
-          onClose={() => setSelectedTx(null)}
+          transaction={selectedTransaction}
+          onClose={() => onSelectTransaction(null)}
           title="Transaction Details"
         />
       )}

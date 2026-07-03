@@ -7,10 +7,15 @@ import PageLayout from "@components/molecules/PageLayout";
 import { GAP } from "@context/design-tokens";
 import BalanceCard from "./components/BalanceCard";
 import AccountsCard from "./components/AccountsCard";
+import type { Account } from "@apptypes/accounts";
 
 const RecentTransactions = lazy(
   () => import("./components/RecentTransactions"),
 );
+
+const getTotalBalance = (accounts: Account[]) =>  {
+  return accounts?.reduce((sum, acc) => sum + acc.balance, 0) ?? 0;
+}
 
 export function OverviewPage() {
   const { accounts, isLoading: accountsLoading } = useAccounts();
@@ -20,8 +25,7 @@ export function OverviewPage() {
     perPage: 5,
   });
 
-  const totalBalance =
-    accounts?.reduce((sum, acc) => sum + acc.balance, 0) ?? 0;
+  const totalBalance = getTotalBalance(accounts)
 
   return (
     <PageLayout title="Overview">
