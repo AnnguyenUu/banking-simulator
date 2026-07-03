@@ -1,32 +1,23 @@
-import { useState } from 'react';
-import {
-  DashboardOutlined,
-  SwapOutlined,
-  UserOutlined,
-  SendOutlined,
-  PieChartOutlined,
-} from '@ant-design/icons';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { useCurrentUser } from '@queries';
-import Layout from '@components/molecules/Layout';
-import Avatar from '@components/atomic/Avatar';
-import Space from '@components/atomic/Space';
-import Menu from '@components/atomic/Menu';
-import Typography from '@components/atomic/Typography';
+import { useState } from "react";
+import { UserOutlined } from "@ant-design/icons";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useCurrentUser } from "@queries";
+import Layout from "@components/molecules/Layout";
+import Avatar from "@components/atomic/Avatar";
+import Space from "@components/atomic/Space";
+import Menu from "@components/atomic/Menu";
+import Typography from "@components/atomic/Typography";
+import transformMenu from "@utils/transformMenu";
 
 const { Header, Sider, Content } = Layout;
 
-const navItems = [
-  { key: '/', label: 'Overview', icon: <DashboardOutlined /> },
-  { key: '/transactions', label: 'Transactions', icon: <SwapOutlined /> },
-  { key: '/transfer', label: 'Transfer', icon: <SendOutlined /> },
-  { key: '/insights', label: 'Insights', icon: <PieChartOutlined /> },
-];
-
 export function AppLayout() {
   const navigate = useNavigate();
+
   const location = useLocation();
-  const { data: user } = useCurrentUser();
+
+  const { user } = useCurrentUser();
+
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -40,24 +31,30 @@ export function AppLayout() {
         collapsedWidth={80}
         className="sticky start-0 top-0 h-screen overflow-auto border-r border-gray-200"
       >
+        {/* ---Icon Header--- */}
         <div className="m-4 h-12 overflow-hidden whitespace-nowrap text-base font-semibold text-slate-800">
-          {collapsed ? 'BB' : 'Baking Bank'}
+          {collapsed ? "BB" : "Baking Bank"}
         </div>
+        {/* ---Menu--- */}
         <Menu
           theme="light"
           mode="inline"
           selectedKeys={[location.pathname]}
-          items={navItems}
+          items={transformMenu(user?.menu || [])}
           onClick={({ key }) => navigate(key)}
         />
       </Sider>
+
+      {/* ---Layout Composition--- */}
       <Layout>
+        {/* ---Header--- */}
         <Header className="sticky top-0 z-10 flex items-center justify-end bg-white px-6">
           <Space>
             <Avatar icon={<UserOutlined />} />
-            <Typography.Text>{user?.name ?? 'Loading…'}</Typography.Text>
+            <Typography.Text>{user?.name ?? "Loading…"}</Typography.Text>
           </Space>
         </Header>
+        {/* ---Content--- */}
         <Content className="m-6">
           <Outlet />
         </Content>

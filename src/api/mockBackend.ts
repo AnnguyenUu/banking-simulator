@@ -9,6 +9,20 @@ const user: User = {
   id: 'u1',
   name: 'Jordan Lee',
   email: 'jordan.lee@example.com',
+  theme: 'light',
+  permissions: [
+    'overview:view',
+    'transactions:view',
+    'transfers:view',
+    'transfers:create',
+    'insights:view',
+  ],
+  menu: [
+    { id: 'overview', label: 'Overview', path: '/', icon: 'DashboardOutlined' },
+    { id: 'transactions', label: 'Transactions', path: '/transactions', icon: 'SwapOutlined' },
+    { id: 'transfer', label: 'Transfer', path: '/transfer', icon: 'SendOutlined' },
+    { id: 'insights', label: 'Insights', path: '/insights', icon: 'PieChartOutlined' },
+  ],
 };
 
 const accounts: Account[] = [

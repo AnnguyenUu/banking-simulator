@@ -1,6 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetchCurrentUser } from '@api/banking';
+import { useQuery } from "@tanstack/react-query";
+import { fetchCurrentUser } from "@api/banking";
+import { USER_QUERY_KEY } from "@context/query-keys";
 
 export function useCurrentUser() {
-  return useQuery({ queryKey: ['me'], queryFn: fetchCurrentUser });
+  const query = useQuery({
+    queryKey: [USER_QUERY_KEY],
+    queryFn: fetchCurrentUser,
+    staleTime: Infinity,
+  });
+  return {
+    ...query,
+    user: query?.data,
+  };
 }

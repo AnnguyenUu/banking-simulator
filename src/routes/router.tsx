@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     ErrorBoundary: RouteErrorFallback,
     children: [
-      { index: true, element: <OverviewPage /> },
+      { index: true, element: <OverviewPage />},
       { path: 'transactions', element: <TransactionsPage /> },
       { path: 'transfer', element: <TransferPage /> },
       { path: 'insights', element: <InsightsPage /> },
