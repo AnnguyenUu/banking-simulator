@@ -98,7 +98,7 @@ const AccountCard = memo(({ account }: { account: Account }) => {
       }}
     >
       <Statistic
-        aria-label={`Available Balance: $${formatCurrency(account.balance)}`}
+        aria-label={`Available Balance: ${formatCurrency(account.balance)}`}
         value={formatCurrency(account.balance)}
         classNames={{
           content: content,

@@ -48,7 +48,7 @@ export const getTransactionColumns = (): ColumnsType<Transaction> => [
     key: "balanceAfter",
     align: "right" as const,
     render: (_: unknown, tx: Transaction) => {
-      return formatCurrency(tx.balanceAfter) ?? 0
+      return formatCurrency(tx.balanceAfter)
     },
   },
 ];
