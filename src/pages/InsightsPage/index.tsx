@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Card, Col, Row, Typography, Skeleton, Empty } from 'antd';
 import {
   Bar,
   BarChart,
@@ -16,6 +15,12 @@ import {
   YAxis,
 } from 'recharts';
 import { useTransactions } from '@queries';
+import Skeleton from '@components/atomic/Skeleton';
+import Typography from '@components/atomic/Typography';
+import Row from '@components/atomic/Row';
+import Col from '@components/atomic/Col';
+import Card from '@components/atomic/Card';
+import Empty from '@components/atomic/Empty';
 
 const CATEGORY_COLORS = ['#1d39c4', '#08979c', '#d4380d', '#d48806', '#389e0d', '#9254de', '#c41d7f'];
 
