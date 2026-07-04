@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { ErrorBoundary } from '@components/molecules/ErrorBoundary';
+import { theme } from '@context/theme';
 import { router } from './routes/router';
 
 const queryClient = new QueryClient({
@@ -16,14 +17,7 @@ const queryClient = new QueryClient({
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ConfigProvider theme={{ 
-        token: { colorPrimary: '#1d39c4' },
-        components: {
-          Typography: {
-            titleMarginBottom: 0
-          },
-        },
-        }}>
+      <ConfigProvider theme={theme}>
         <ErrorBoundary>
           <RouterProvider router={router} />
         </ErrorBoundary>

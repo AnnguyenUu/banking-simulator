@@ -1,21 +1,13 @@
 import type { Preview } from '@storybook/react-vite'
 import { ConfigProvider } from 'antd'
+import { theme } from '@context/theme'
 import 'antd/dist/reset.css'
 import '../src/index.css'
 
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <ConfigProvider
-        theme={{
-          token: { colorPrimary: '#1d39c4' },
-          components: {
-            Typography: {
-              titleMarginBottom: 0,
-            },
-          },
-        }}
-      >
+      <ConfigProvider theme={theme}>
         <Story />
       </ConfigProvider>
     ),
