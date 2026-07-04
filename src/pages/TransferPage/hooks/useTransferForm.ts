@@ -27,7 +27,6 @@ export const useTransferForm = () => {
   const onReset = () => setResult(null);
 
   const onSuccess = (data: TransferResult) => {
-    debugger
     setResult(data);
     form.resetFields();
     message.open({

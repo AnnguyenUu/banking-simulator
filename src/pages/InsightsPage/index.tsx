@@ -1,9 +1,8 @@
-import { lazy, Suspense } from "react";
-import { useTransactions } from "@queries";
+import { lazy, Suspense, useMemo } from "react";
+import { useInsights } from "@queries";
 import Skeleton from "@components/atomic/Skeleton";
 import Row from "@components/atomic/Row";
 import Col from "@components/atomic/Col";
-import { useInsightsTransform } from "./hooks/useInsightsTransform";
 import PageLayout from "@components/molecules/PageLayout";
 
 const SpendingByCategory = lazy(() => import("./components/SpendingByCategory"));
@@ -14,17 +13,17 @@ const TopMerchants = lazy(() => import("./components/TopMerchants"));
 const chartFallback = <Skeleton active paragraph={{ rows: 6 }} />;
 
 export function InsightsPage() {
-  const { transactions, isLoading } = useTransactions({
-    page: 1,
-    perPage: 100
-  });
-
   const {
     spendingByCategory,
-    spendingTrend,
     topMerchants,
     monthlyIncomeVsExpense,
-  } = useInsightsTransform(transactions);
+    isLoading,
+  } = useInsights();
+
+  const spendingTrend = useMemo(
+    () => monthlyIncomeVsExpense.map(({ month, expenses }) => ({ month, expenses })),
+    [monthlyIncomeVsExpense],
+  );
 
   if (isLoading) {
     return <Skeleton active paragraph={{ rows: 8 }} />;
