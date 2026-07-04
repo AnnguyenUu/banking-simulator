@@ -5,10 +5,16 @@ import { OverviewPage } from "@pages/OverviewPage";
 import { TransactionsPage } from "@pages/TransactionsPage";
 import { TransferPage } from "@pages/TransferPage";
 import { InsightsPage } from "@pages/InsightsPage";
+import { LoginPage } from "@pages/LoginPage";
 import ProtectedRoute from "@components/organisms/ProtectedRoute";
 import { PERMISSIONS } from "@context/permissions";
 
 export const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <LoginPage />,
+    ErrorBoundary: RouteErrorFallback,
+  },
   {
     path: "/",
     element: <AppLayout />,
