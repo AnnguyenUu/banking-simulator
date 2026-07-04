@@ -5,4 +5,7 @@ const Flex = (props: FlexProps) => {
   return <FlexPrimitive {...props} />;
 };
 
-export default memo(Flex);
+const MemoFlex = memo(Flex);
+MemoFlex.displayName = "Flex";
+
+export default MemoFlex;

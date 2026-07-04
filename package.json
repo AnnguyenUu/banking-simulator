@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@ant-design/icons": "^6.3.2",
@@ -47,6 +49,16 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.62.1",
     "vite": "^8.1.2",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.9",
+    "storybook": "^10.4.6",
+    "@storybook/react-vite": "^10.4.6",
+    "@chromatic-com/storybook": "^5.2.1",
+    "@storybook/addon-vitest": "^10.4.6",
+    "@storybook/addon-a11y": "^10.4.6",
+    "@storybook/addon-docs": "^10.4.6",
+    "@storybook/addon-mcp": "^0.6.0",
+    "eslint-plugin-storybook": "^10.4.6",
+    "playwright": "^1.61.1",
+    "@vitest/browser-playwright": "^4.1.9"
   }
 }

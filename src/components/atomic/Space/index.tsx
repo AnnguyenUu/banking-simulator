@@ -5,7 +5,10 @@ const Space = (props: SpaceProps) => {
   return <SpacePrimitive {...props} />;
 };
 
-export default Object.assign(memo(Space), {
+const MemoSpace = memo(Space);
+MemoSpace.displayName = "Space";
+
+export default Object.assign(MemoSpace, {
   Compact: SpacePrimitive.Compact,
   Addon: SpacePrimitive.Addon,
 });

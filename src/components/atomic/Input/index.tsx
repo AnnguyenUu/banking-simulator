@@ -5,7 +5,10 @@ const Input = (props: InputProps) => {
   return <InputPrimitive {...props} />;
 };
 
-export default Object.assign(memo(Input), {
+const MemoInput = memo(Input);
+MemoInput.displayName = "Input";
+
+export default Object.assign(MemoInput, {
   Group: InputPrimitive.Group,
   Search: InputPrimitive.Search,
   TextArea: InputPrimitive.TextArea,

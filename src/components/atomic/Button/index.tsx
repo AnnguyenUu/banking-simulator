@@ -5,6 +5,9 @@ const Button = (props: ButtonProps) => {
   return <ButtonPrimitive {...props} />
 }
 
-export default Object.assign(memo(Button), {
+const MemoButton = memo(Button);
+MemoButton.displayName = "Button";
+
+export default Object.assign(MemoButton, {
   Group: ButtonPrimitive.Group,
 });

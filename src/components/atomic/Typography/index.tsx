@@ -6,7 +6,10 @@ const Typography = (props: TypographyProps) => {
   return <TypographyPrimitive className={`${className} m-0`} {...rest} />;
 };
 
-export default Object.assign(memo(Typography), {
+const MemoTypography = memo(Typography);
+MemoTypography.displayName = "Typography";
+
+export default Object.assign(MemoTypography, {
   Title: TypographyPrimitive.Title,
   Text: TypographyPrimitive.Text,
   Paragraph: TypographyPrimitive.Paragraph,
