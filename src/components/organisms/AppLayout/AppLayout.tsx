@@ -9,8 +9,7 @@ import Avatar from "@components/atomic/Avatar";
 import Space from "@components/atomic/Space";
 import Menu from "@components/atomic/Menu";
 import Typography from "@components/atomic/Typography";
-import transformMenu from "@utils/transformMenu";
-import Skeleton from "@components/atomic/Skeleton";
+import transformMenu from "@utils/transformMenu";x
 
 const { Header, Sider, Content } = Layout;
 
