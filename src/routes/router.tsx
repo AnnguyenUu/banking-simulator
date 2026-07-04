@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { AppLayout } from "@components/organisms/layout/AppLayout";
+import { AppLayout } from "@components/organisms/AppLayout/AppLayout";
 import { RouteErrorFallback } from "@components/molecules/ErrorBoundary/RouteErrorFallback";
 import { OverviewPage } from "@pages/OverviewPage";
 import { TransactionsPage } from "@pages/TransactionsPage";
