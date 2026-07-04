@@ -4,10 +4,14 @@ import { useDebounceCallback } from "../../../hooks/useDebounce";
 
 export const useGetTransactionQuery = () => {
   const [search, setSearch] = useState("");
-  
+
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const [selectedTransaction, setSelectedTx] = useState<Transaction | null>(null);
+
+  const [fromDate, setFromDate] = useState<string | undefined>(undefined);
+
+  const [toDate, setToDate] = useState<string | undefined>(undefined);
 
   const debounced = useDebounceCallback(setSearchQuery, 500);
 
@@ -21,11 +25,23 @@ export const useGetTransactionQuery = () => {
     });
   };
 
+  const onChangeDateRange = (
+    _dates: unknown,
+    dateStrings: [string, string],
+  ) => {
+    const [from, to] = dateStrings || [];
+    setFromDate(from || undefined);
+    setToDate(to || undefined);
+  };
+
   return {
     onSearch,
     search,
     query: searchQuery,
     selectedTransaction,
-    onSelectTransaction
+    onSelectTransaction,
+    fromDate,
+    toDate,
+    onChangeDateRange,
   }
 };

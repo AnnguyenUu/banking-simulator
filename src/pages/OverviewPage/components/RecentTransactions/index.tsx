@@ -2,7 +2,6 @@ import type { Transaction } from "@apptypes/transactions";
 import Card from "@components/atomic/Card";
 import Empty from "@components/atomic/Empty";
 import Flex from "@components/atomic/Flex";
-import List from "@components/atomic/List";
 import Skeleton from "@components/atomic/Skeleton";
 import Tag from "@components/atomic/Tag";
 import Typography from "@components/atomic/Typography";
@@ -33,15 +32,34 @@ const RecentTransactions = ({ loading, transactions }: Props) => {
     <Flex vertical gap={GAP.LARGE}>
       <Typography.Title level={4}>Recent Transactions</Typography.Title>
       <Card>
-        <List
+        <ListTransactions transactions={transactions} />
+        {/* <List
           dataSource={transactions || []}
-          itemLayout="vertical"
-          size="small"
           renderItem={(transaction) => (
             <RecentTransaction key={transaction.id} transaction={transaction} />
           )}
-        />
+        /> */}
       </Card>
+    </Flex>
+  );
+};
+
+const ListTransactions = ({
+  transactions,
+}: {
+  transactions: Transaction[];
+}) => {
+  return (
+    <Flex
+      vertical
+      gap={GAP.LARGE}
+      className="[&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-gray-200"
+    >
+      {(transactions || []).map((transaction) => {
+        return (
+          <RecentTransaction key={transaction.id} transaction={transaction} />
+        );
+      })}
     </Flex>
   );
 };
@@ -49,26 +67,24 @@ const RecentTransactions = ({ loading, transactions }: Props) => {
 const RecentTransaction = memo(
   ({ transaction }: { transaction: Transaction }) => {
     return (
-      <List.Item>
-        <Flex justify="space-between" align="center">
+      <Flex className="pb-3" justify="space-between" align="center">
+        <div>
+          <Typography.Text strong>{transaction.description}</Typography.Text>
           <div>
-            <Typography.Text strong>{transaction.description}</Typography.Text>
-            <div>
-              <Typography.Text type="secondary">
-                {transaction.date}
-              </Typography.Text>
-              &nbsp;
-              <Tag>{transaction.category}</Tag>
-            </div>
+            <Typography.Text type="secondary">
+              {transaction.date}
+            </Typography.Text>
+            &nbsp;
+            <Tag>{transaction.category}</Tag>
           </div>
-          <Typography.Text
-            className={getAmountIndicator(transaction.amount)?.className}
-          >
-            {getAmountIndicator(transaction?.amount)?.prefix || ""}
-            {formatCurrency(transaction.amount)}
-          </Typography.Text>
-        </Flex>
-      </List.Item>
+        </div>
+        <Typography.Text
+          className={getAmountIndicator(transaction.amount)?.className}
+        >
+          {getAmountIndicator(transaction?.amount)?.prefix || ""}
+          {formatCurrency(transaction.amount)}
+        </Typography.Text>
+      </Flex>
     );
   },
 );

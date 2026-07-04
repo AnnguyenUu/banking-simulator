@@ -38,11 +38,6 @@ export function TransferPage() {
         <Col xs={24} md={14}>
           <Card className="h-full">
             <TransferForm
-              onFieldsChange={(field) => {
-                console.log({
-                  field
-                })
-              }}
               activeAccounts={activeAccounts || []}
               fromAccount={fromAccount}
               isPending={isPending}

@@ -5,7 +5,9 @@ export type GetTransactionPayload = {
   accountId: string;
   description: string;
   category: string;
-  search: string
+  search: string;
+  fromDate: string;
+  toDate: string;
 }>;
 
 export interface Transaction {

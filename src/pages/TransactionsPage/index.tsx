@@ -7,6 +7,7 @@ import Space from "@components/atomic/Space";
 import Input from "@components/atomic/Input";
 import Select from "@components/atomic/Select";
 import Table from "@components/atomic/Table";
+import DatePicker from "@components/atomic/DatePicker";
 import { useChangePage } from "../../hooks/useChangePage";
 import { useGetTransactionQuery } from "./hooks/useGetTransactionQuery";
 
@@ -26,17 +27,27 @@ export function TransactionsPage() {
     search,
     query,
     selectedTransaction,
-    onSelectTransaction
+    onSelectTransaction,
+    fromDate,
+    toDate,
+    onChangeDateRange,
   } = useGetTransactionQuery()
 
   const { accounts } = useAccounts();
-  
+
   const { transactions, isLoading, total } = useTransactions({
     page,
     perPage,
     accountId: selectedAccountId || "",
     search: query,
+    fromDate,
+    toDate,
   });
+
+  console.log({
+    fromDate,
+    toDate,
+  })
 
   const columns = useMemo(() => getTransactionColumns(), []);
 
@@ -62,6 +73,11 @@ export function TransactionsPage() {
               label: account.name,
               value: account.id,
             }))}
+          />
+          <DatePicker.RangePicker
+            allowClear
+            format="YYYY-MM-DD"
+            onChange={onChangeDateRange}
           />
         </Space>
       }

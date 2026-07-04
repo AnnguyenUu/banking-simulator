@@ -32,13 +32,6 @@ const TransferForm = ({
     <Form<TransferFormValues>
       {...rest}
       form={form}
-      onFieldsChange={(fields) => {
-        const [field] = fields;
-        const [name]: string[] = field?.name;
-        if (name === "fromAccountId") {
-          form?.resetFields(["toAccountId"]);
-        }
-      }}
     >
       <Form.Item<string>
         name="fromAccountId"
@@ -47,6 +40,9 @@ const TransferForm = ({
       >
         <Select
           placeholder="Select account"
+          onChange={() => {
+            form?.resetFields(["toAccountId"]);
+          }}
           options={activeAccounts.map((account) => ({
             label: `${account.name} (${account.accountNumber}) — ${formatCurrency(account.balance)}`,
             value: account.id,
