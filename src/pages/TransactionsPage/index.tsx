@@ -1,6 +1,6 @@
 import { lazy, useMemo } from "react";
 import { useAccounts, useTransactions } from "@queries";
-import { useSessionStore } from "@store/useSessionStore";
+import { useSelectedAccount } from "@store/useSelectedAccount";
 import { getTransactionColumns } from "./utils/getTransactionColumns";
 import PageLayout from "@components/molecules/PageLayout";
 import Space from "@components/atomic/Space";
@@ -16,9 +16,7 @@ const TransactionDetails = lazy(
 );
 
 export function TransactionsPage() {
-  const selectedAccountId = useSessionStore((state) => state.selectedAccountId);
-
-  const selectAccount = useSessionStore((state) => state.selectAccount);
+  const [selectedAccountId, selectAccount] = useSelectedAccount();
 
   const { perPage, onChangeTable, page } = useChangePage();
 

@@ -14,6 +14,7 @@ ADR that supersedes the old one and note the supersession in both files.
 | # | Title | Covers |
 |---|---|---|
 | [0001](frontend-architecture.md) | Frontend Architecture | Vite SPA, Ant Design + Tailwind, atomic component layering |
-| [0002](state-management.md) | State Management Approach | React Query (server state) vs. Zustand (client state) split |
+| [0002](state-management.md) | State Management Approach | React Query (server state) vs. client state — *client-state mechanism superseded by 0005* |
 | [0003](api-integration.md) | API Integration Approach | Axios + mock-adapter, contract-first switch to a real backend |
 | [0004](security-considerations.md) | Security Considerations & Assumptions | CSP, cookie-based session auth, route-guard limitations |
+| [0005](client-state-persistence.md) | Client State Persistence Mechanism | Zustand → `sessionStorage`-backed hook |

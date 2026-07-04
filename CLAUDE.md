@@ -23,11 +23,11 @@ Run tests matching a name: `npx vitest run -t "renders account balances"`
 
 ## Architecture
 
-**Stack**: React 19, Vite, TypeScript, Ant Design v6 (components) + Tailwind CSS v4 (layout/spacing/utility styling), Recharts (charts), TanStack React Query (server state), Zustand (client state), React Router v7, Axios.
+**Stack**: React 19, Vite, TypeScript, Ant Design v6 (components) + Tailwind CSS v4 (layout/spacing/utility styling), Recharts (charts), TanStack React Query (server state), React Router v7, Axios.
 
 **State split** — this is the main thing to get right when adding features:
 - Server data (accounts, transactions, current user) always goes through **React Query** hooks — reads in [src/queries/](src/queries/), writes in [src/mutations/](src/mutations/) — backed by request functions in [src/api/banking.ts](src/api/banking.ts). Never fetch data with `useEffect` + `useState`.
-- Pure UI/client state (e.g. which account is selected as a filter) lives in the **Zustand** store at [src/store/useSessionStore.ts](src/store/useSessionStore.ts). Don't put server data in Zustand or client-only UI state in React Query.
+- Pure UI/client state (e.g. which account is selected as a filter) lives in a **`sessionStorage`-backed hook** at [src/store/useSelectedAccount.ts](src/store/useSelectedAccount.ts) (built on the generic [useSessionStorage](src/hooks/useSessionStorage.ts) hook), not a global store — it's plain React state written through to `sessionStorage` so it survives a page refresh within the same tab. Don't put server data here or client-only UI state in React Query.
 
 **API layer** ([src/api/](src/api/)):
 - [client.ts](src/api/client.ts) — the shared Axios instance. Has request/response interceptors for the bearer token (`localStorage.auth_token`) and 401 handling. All requests should go through this instance, not a bare `axios.get`.

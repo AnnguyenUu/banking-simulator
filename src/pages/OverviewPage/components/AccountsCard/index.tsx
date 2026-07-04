@@ -9,7 +9,7 @@ import Statistic from "@components/atomic/Statistic";
 import Tag from "@components/atomic/Tag";
 import Typography from "@components/atomic/Typography";
 import { GAP } from "@context/design-tokens";
-import { useSessionStore } from "@store/useSessionStore";
+import { useSelectedAccount } from "@store/useSelectedAccount";
 import { formatCurrency } from "@utils/formatCurrency";
 import { getAmountIndicator } from "@utils/getAmountIndicator";
 import { memo, useMemo } from "react";
@@ -63,7 +63,7 @@ const CardLoading = () => {
 };
 
 const AccountCard = memo(({ account }: { account: Account }) => {
-  const selectAccount = useSessionStore((state) => state.selectAccount);
+  const [, selectAccount] = useSelectedAccount();
 
   const navigate = useNavigate();
 

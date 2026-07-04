@@ -23,14 +23,15 @@ store) risks staleness bugs and unnecessary re-renders.
 - **Mutations patch the cache directly** — `useLogin` seeds `['me']`,
   `useLogout` calls `queryClient.clear()`, `useTransferFunds` invalidates
   `['accounts']`/`['transactions']`.
-- **Pure client UI state → Zustand**
-  ([useSessionStore](../../src/store/useSessionStore.ts)) — currently just
-  `selectedAccountId`.
+- **Pure client UI state → a `sessionStorage`-backed hook**
+  ([useSelectedAccount](../../src/store/useSelectedAccount.ts)) — currently
+  just `selectedAccountId`; see [0005](client-state-persistence.md) for why
+  this mechanism specifically (plain React state, not a separate library).
 - **Page-local ephemeral state → local `useState`** — search debounce, date range, drawer selection.
 
 ## Trade-offs (Consequences)
 
-- **Two mental models** to learn (React Query vs. Zustand) instead of one.
-- **No enforced boundary** — nothing stops server data ending up in Zustand except convention/review.
+- **No enforced boundary** — nothing stops server data ending up in the
+  client-state hook (or client-only state in React Query) except
+  convention/review.
 - **Cache-patching requires React Query fluency** — easy to reach for a blunter `invalidateQueries()` instead.
-- **Module-level Zustand state leaks across tests** unless reset in `beforeEach`.
