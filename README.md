@@ -83,7 +83,6 @@ npm run preview  # serve the production build locally
 |---|---|
 | `src/api/` | Axios client, request functions, and the in-browser mock backend |
 | `src/queries/`, `src/mutations/` | React Query hooks for server state (reads/writes) |
-| `src/store/` | Zustand store for client-only UI state |
 | `src/pages/` | One folder per route (`OverviewPage`, `TransactionsPage`, `TransferPage`, `InsightsPage`, `LoginPage`) |
 | `src/components/atomic/` | Thin wrappers around Ant Design primitives, documented in Storybook |
 | `src/routes/` | Router + route protection |
