@@ -13,7 +13,7 @@ import Alert from "@components/atomic/Alert";
 
 interface Props extends Pick<
   FormProps<TransferFormValues>,
-  "onFinish" | "form" | "layout"
+  "onFinish" | "form" | "layout" | "onFieldsChange"
 > {
   activeAccounts: Account[];
   fromAccount: Account | undefined;
@@ -25,11 +25,22 @@ const TransferForm = ({
   fromAccount,
   isPending,
   isError,
+  form,
   ...rest
 }: Props) => {
   return (
-    <Form {...rest}>
-      <Form.Item
+    <Form<TransferFormValues>
+      {...rest}
+      form={form}
+      onFieldsChange={(fields) => {
+        const [field] = fields;
+        const [name]: string[] = field?.name;
+        if (name === "fromAccountId") {
+          form?.resetFields(["toAccountId"]);
+        }
+      }}
+    >
+      <Form.Item<string>
         name="fromAccountId"
         label="From account"
         rules={[{ required: true, message: "Select a source account" }]}
@@ -68,10 +79,12 @@ const TransferForm = ({
       >
         <Select
           placeholder="Select account"
-          options={activeAccounts.map((account) => ({
-            label: `${account.name} (${account.accountNumber})`,
-            value: account.id,
-          }))}
+          options={activeAccounts
+            .filter((account) => account.id !== fromAccount?.id)
+            .map((account) => ({
+              label: `${account.name} (${account.accountNumber})`,
+              value: account.id,
+            }))}
         />
       </Form.Item>
 
