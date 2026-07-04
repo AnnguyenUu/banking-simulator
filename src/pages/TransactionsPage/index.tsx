@@ -1,7 +1,7 @@
 import { lazy, useMemo } from "react";
 import { useAccounts, useTransactions } from "@queries";
 import { useSessionStore } from "@store/useSessionStore";
-import { getTransactionColumns } from "./components/getTransactionColumns";
+import { getTransactionColumns } from "./utils/getTransactionColumns";
 import PageLayout from "@components/molecules/PageLayout";
 import Space from "@components/atomic/Space";
 import Input from "@components/atomic/Input";
@@ -43,11 +43,6 @@ export function TransactionsPage() {
     fromDate,
     toDate,
   });
-
-  console.log({
-    fromDate,
-    toDate,
-  })
 
   const columns = useMemo(() => getTransactionColumns(), []);
 

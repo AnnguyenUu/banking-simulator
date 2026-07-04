@@ -3,7 +3,7 @@ import Descriptions from "@components/atomic/Descriptions";
 import Drawer from "@components/atomic/Drawer";
 import { getAmountIndicator, type AmountIndicator } from "@utils/getAmountIndicator";
 import { memo, useMemo } from "react";
-import getDescriptions from "../getDescriptions";
+import getDescriptions from "../../utils/getDescriptions";
 import type { DescriptionsItemType } from "antd/es/descriptions";
 
 interface Props {
