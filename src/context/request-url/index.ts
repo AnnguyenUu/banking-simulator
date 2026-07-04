@@ -1,3 +1,4 @@
 export const ACCOUNTS_URL = "/accounts"
 export const TRANSACTIONS_URL = "/transactions"
 export const TRANSFER_URL = "/transfers"
+export const ME_URL = "/me"
