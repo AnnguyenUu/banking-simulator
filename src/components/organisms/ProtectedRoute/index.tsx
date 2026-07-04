@@ -1,6 +1,5 @@
 import type { Permission } from "@apptypes/user";
 import Result from "@components/atomic/Result";
-import Skeleton from "@components/atomic/Skeleton";
 import { useCurrentUser } from "@queries";
 import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
@@ -13,19 +12,13 @@ interface Props {
 const ProtectedRoute = ({ children, permission = "" }: Props) => {
   const { user, status } = useCurrentUser();
 
-  if(status === "pending") {
-    return <div>
-      <Skeleton active />
-    </div>
-  }
+  const { permissions } = user || {};
+
+  const isHasPermisson = !!permission && permissions?.includes(permission);
 
   if (status === "error") {
     return <Navigate to="/login" replace />;
   }
-
-  const { permissions } = user || {};
-
-  const isHasPermisson = !!permission && permissions?.includes(permission);
 
   if (!isHasPermisson && status === "success") {
     return (

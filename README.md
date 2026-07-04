@@ -2,7 +2,9 @@
 
 A digital banking dashboard — account balances, transactions, transfers, and
 spending insights — built with React 19 + Vite. See [CLAUDE.md](CLAUDE.md)
-for an architecture deep-dive and [API.md](API.md) for the backend contract.
+for an architecture deep-dive, [API.md](API.md) for the backend contract, and
+[docs/adr/](docs/adr/) for the reasoning behind the critical design
+decisions (architecture, state management, API integration, security).
 
 ## Prerequisites
 
@@ -90,3 +92,16 @@ npm run preview  # serve the production build locally
 
 See [CLAUDE.md](CLAUDE.md) for the full architecture notes, styling
 conventions, and path alias reference.
+
+## Architecture Decision Records
+
+The *why* behind this project's critical design choices — not just what the
+code does, but the alternatives considered and the trade-offs accepted — is
+recorded in [docs/adr/](docs/adr/):
+
+| ADR | Covers |
+|---|---|
+| [0001](docs/adr/frontend-architecture.md) | Frontend architecture (Vite SPA, Ant Design + Tailwind, atomic component layering) |
+| [0002](docs/adr/state-management.md) | State management (React Query for server state, Zustand for client state) |
+| [0003](docs/adr/api-integration.md) | API integration (mock-adapter + contract-first switch to a real backend) |
+| [0004](docs/adr/security-considerations.md) | Security considerations & assumptions (CSP, auth, route-guard limits) |
