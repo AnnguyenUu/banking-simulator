@@ -2,9 +2,14 @@ import type { Transaction } from "@apptypes/transactions";
 import { FinancialDataFacade } from "@utils/formatTransaction";
 import { useMemo } from "react";
 
+const TRANSFER_STATUS = "Transfer";
+
+const getSpecificTransactions = (transaction: Transaction) =>
+  transaction.category !== TRANSFER_STATUS;
+
 export const useInsightsTransform = (transactions: Transaction[]) => {
   const spendingTransactions = useMemo(
-    () => (transactions ?? []).filter((tx) => tx.category !== "Transfer"),
+    () => (transactions ?? []).filter(getSpecificTransactions),
     [transactions],
   );
 

@@ -1,9 +1,10 @@
 import type { Transaction } from "@apptypes/transactions";
 import Descriptions from "@components/atomic/Descriptions";
 import Drawer from "@components/atomic/Drawer";
-import { getAmountIndicator } from "@utils/getAmountIndicator";
+import { getAmountIndicator, type AmountIndicator } from "@utils/getAmountIndicator";
 import { memo, useMemo } from "react";
 import getDescriptions from "../getDescriptions";
+import type { DescriptionsItemType } from "antd/es/descriptions";
 
 interface Props {
   transaction: Transaction | null;
@@ -18,9 +19,9 @@ const getIndicator = (transaction: Transaction | null) => {
 }
 
 const TransactionDetails = ({ transaction, onClose, title }: Props) => {
-  const configIndicator = getIndicator(transaction)
+  const configIndicator: AmountIndicator | null = getIndicator(transaction)
 
-  const items = useMemo(() => {
+  const items: DescriptionsItemType[] = useMemo(() => {
     return getDescriptions({
       transaction,
       prefix: configIndicator?.prefix,

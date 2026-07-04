@@ -25,7 +25,7 @@ export function OverviewPage() {
     perPage: 5,
   });
 
-  const totalBalance = getTotalBalance(accounts)
+  const totalBalance: number = getTotalBalance(accounts)
 
   return (
     <PageLayout title="Overview">
