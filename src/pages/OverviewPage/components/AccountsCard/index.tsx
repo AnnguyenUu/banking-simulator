@@ -1,4 +1,4 @@
-import type { Account, AccountStatus } from "@apptypes/accounts";
+import type { Account } from "@apptypes/accounts";
 import Card from "@components/atomic/Card";
 import Col from "@components/atomic/Col";
 import Empty from "@components/atomic/Empty";
@@ -6,7 +6,7 @@ import Row from "@components/atomic/Row";
 import Skeleton from "@components/atomic/Skeleton";
 import Space from "@components/atomic/Space";
 import Statistic from "@components/atomic/Statistic";
-import Tag from "@components/atomic/Tag";
+import Status from "@components/atomic/Status";
 import Typography from "@components/atomic/Typography";
 import { GAP } from "@context/design-tokens";
 import { useSelectedAccount } from "@store/useSelectedAccount";
@@ -19,18 +19,6 @@ interface Props {
   loading: boolean;
   accounts: Account[];
 }
-
-const typeColors: Record<string, string> = {
-  checking: "blue",
-  savings: "green",
-  credit: "purple",
-};
-
-const statusColors: Record<AccountStatus, string> = {
-  active: "success",
-  frozen: "warning",
-  closed: "default",
-};
 
 const AccountsCard = ({ loading, accounts }: Props) => {
   if (loading) {
@@ -78,18 +66,15 @@ const AccountCard = memo(({ account }: { account: Account }) => {
       title={account.name}
       extra={
         <Space size={4}>
-          <Tag
+          <Status
             aria-label={`Account Type: ${account.type}`}
-            color={typeColors[account.type]}
-          >
-            {account.type}
-          </Tag>
-          <Tag
+            status={account.type}
+          />
+          <Status
             aria-label={`Account Status: ${account.status}`}
-            color={statusColors[account.status]}
-          >
-            {account.status}
-          </Tag>
+            status={account.status}
+          />
+          x
         </Space>
       }
       onClick={() => {

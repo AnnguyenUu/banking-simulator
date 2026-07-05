@@ -1,5 +1,5 @@
 import type { Transaction } from "@apptypes/transactions";
-import Tag from "@components/atomic/Tag";
+import Status from "@components/atomic/Status";
 import Typography from "@components/atomic/Typography";
 import { formatCurrency } from "@utils/formatCurrency";
 import { getAmountIndicator } from "@utils/getAmountIndicator";
@@ -18,14 +18,14 @@ export const getTransactionColumns = (): ColumnsType<Transaction> => [
     title: "Category",
     dataIndex: "category",
     key: "category",
-    render: (category: string) => <Tag>{category}</Tag>,
+    render: (category: string) => <Status status={category} />,
   },
   {
     title: "Status",
     dataIndex: "status",
     key: "status",
     render: (status: Transaction["status"]) => (
-      <Tag color={status === "completed" ? "green" : "gold"}>{status}</Tag>
+      <Status status={status} />
     ),
   },
   {

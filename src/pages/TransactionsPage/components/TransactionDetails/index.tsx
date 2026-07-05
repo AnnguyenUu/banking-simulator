@@ -25,7 +25,7 @@ const TransactionDetails = ({ transaction, onClose, title }: Props) => {
     return getDescriptions({
       transaction,
       prefix: configIndicator?.prefix,
-      className: configIndicator?.prefix
+      className: configIndicator?.className
     })
   }, [transaction, configIndicator]);
 

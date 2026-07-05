@@ -1,5 +1,5 @@
 import type { Transaction } from "@apptypes/transactions";
-import Tag from "@components/atomic/Tag";
+import Status from "@components/atomic/Status";
 import Typography from "@components/atomic/Typography";
 import { formatCurrency } from "@utils/formatCurrency";
 
@@ -13,6 +13,10 @@ const getDescriptions = ({
   prefix: string | undefined
 }) => {
   if (!transaction) return [];
+
+  console.log({
+    className
+  })
 
     return [
       {
@@ -33,15 +37,13 @@ const getDescriptions = ({
       {
         key: "category",
         label: "Category",
-        children: <Tag>{transaction.category}</Tag>,
+        children: <Status status={transaction.category} />
       },
       {
         key: "status",
         label: "Status",
         children: (
-          <Tag color={transaction.status === "completed" ? "green" : "gold"}>
-            {transaction.status}
-          </Tag>
+          <Status status={transaction?.status} />
         ),
       },
       {

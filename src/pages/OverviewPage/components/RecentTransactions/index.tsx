@@ -3,6 +3,7 @@ import Card from "@components/atomic/Card";
 import Empty from "@components/atomic/Empty";
 import Flex from "@components/atomic/Flex";
 import Skeleton from "@components/atomic/Skeleton";
+import Status from "@components/atomic/Status";
 import Tag from "@components/atomic/Tag";
 import Typography from "@components/atomic/Typography";
 import { GAP } from "@context/design-tokens";
@@ -75,7 +76,7 @@ const RecentTransaction = memo(
               {transaction.date}
             </Typography.Text>
             &nbsp;
-            <Tag>{transaction.category}</Tag>
+            <Status status={transaction.category} />
           </div>
         </div>
         <Typography.Text

@@ -2,12 +2,12 @@ import type { Account } from "@apptypes/accounts";
 import Card from "@components/atomic/Card";
 import Divider from "@components/atomic/Divider";
 import Flex from "@components/atomic/Flex";
-import Tag from "@components/atomic/Tag";
 import Typography from "@components/atomic/Typography";
 import { GAP } from "@context/design-tokens";
 import { formatCurrency } from "@utils/formatCurrency";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import { memo } from "react";
+import Status from "@components/atomic/Status";
 
 interface Props {
   fromAccount: Account | undefined;
@@ -15,12 +15,6 @@ interface Props {
   amount: number | undefined;
   note: string | undefined;
 }
-
-const typeColors: Record<Account["type"], string> = {
-  checking: "blue",
-  savings: "green",
-  credit: "purple",
-};
 
 const AccountRow = ({ label, account }: { label: string; account: Account }) => (
   <Flex justify="space-between" align="center">
@@ -30,7 +24,7 @@ const AccountRow = ({ label, account }: { label: string; account: Account }) => 
       </Typography.Text>
       <Flex align="center" gap={GAP.SMALL}>
         <Typography.Text strong>{account.name}</Typography.Text>
-        <Tag color={typeColors[account.type]}>{account.type}</Tag>
+        <Status status={account?.type} />
       </Flex>
       <Typography.Text type="secondary">{account.accountNumber}</Typography.Text>
     </div>
