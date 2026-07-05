@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Tag from "../Tag";
+import { statusMapping } from "@utils/statusMapping";
 
 const Status = ({
   status,
@@ -8,21 +9,6 @@ const Status = ({
   status: string;
   children?: ReactNode;
 }) => {
-  const statusMapping = (status: string) => {
-    switch (status) {
-      case "checking":
-        return "blue";
-      case "savings":
-      case "completed":
-      case "active":
-        return "green";
-      case "pending":
-      case "frozen":
-        return "warning";
-      case "credit":
-        return "purple";
-    }
-  };
   return (
     <Tag className="capitalize" color={statusMapping(status)}>
       {children || status}
