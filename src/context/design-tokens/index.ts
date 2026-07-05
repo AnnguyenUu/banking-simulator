@@ -7,3 +7,5 @@ export const GAP = {
   XXXLARGE: 40,
   XXXXLARGE: 48,
 };
+
+export const COLOR_PRIMARY = "#1d39c4"
