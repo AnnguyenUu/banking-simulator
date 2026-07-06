@@ -74,7 +74,6 @@ const AccountCard = memo(({ account }: { account: Account }) => {
             aria-label={`Account Status: ${account.status}`}
             status={account.status}
           />
-          x
         </Space>
       }
       onClick={() => {
