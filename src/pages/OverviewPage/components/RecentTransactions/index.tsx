@@ -4,7 +4,6 @@ import Empty from "@components/atomic/Empty";
 import Flex from "@components/atomic/Flex";
 import Skeleton from "@components/atomic/Skeleton";
 import Status from "@components/atomic/Status";
-import Tag from "@components/atomic/Tag";
 import Typography from "@components/atomic/Typography";
 import { GAP } from "@context/design-tokens";
 import { formatCurrency } from "@utils/formatCurrency";
