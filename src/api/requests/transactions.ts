@@ -1,4 +1,4 @@
-import type { AxiosResponseListType } from "@apptypes/AxiosResponseType";
+import type { AxiosResponseListType } from "@apptypes/responseType";
 import { RequestBuilder } from "../http/requestBuilder";
 import type { GetTransactionPayload, Transaction } from "@apptypes/transactions";
 import { TRANSACTIONS_URL } from "@context/request-url";
