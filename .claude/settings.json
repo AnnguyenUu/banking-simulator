@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(set -e)",
+      "Bash(git rm src/queries/index.ts src/mutations/index.ts *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5183/)",
+      "Bash(awk '{print $1}')"
+    ],
+    "additionalDirectories": [
+      "/Users/annguyenuu/Documents/baking/src/pages"
+    ]
+  }
+}

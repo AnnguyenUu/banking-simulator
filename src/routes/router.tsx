@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AppLayout } from "@components/organisms/AppLayout/AppLayout";
 import { RouteErrorFallback } from "@components/molecules/ErrorBoundary/RouteErrorFallback";
-import { OverviewPage } from "@pages/OverviewPage";
-import { TransactionsPage } from "@pages/TransactionsPage";
-import { TransferPage } from "@pages/TransferPage";
-import { InsightsPage } from "@pages/InsightsPage";
-import { LoginPage } from "@pages/LoginPage";
+import { OverviewPage } from "@modules/overview/presentation";
+import { TransactionsPage } from "@modules/transactions/presentation";
+import { TransferPage } from "@modules/transfer/presentation";
+import { InsightsPage } from "@modules/insights/presentation";
+import { LoginPage } from "@modules/auth/presentation";
 import ProtectedRoute from "@components/organisms/ProtectedRoute";
 import { PERMISSIONS } from "@context/permissions";
 

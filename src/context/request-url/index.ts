@@ -1,7 +1,0 @@
-export const ACCOUNTS_URL = "/accounts"
-export const TRANSACTIONS_URL = "/transactions"
-export const TRANSFER_URL = "/transfers"
-export const ME_URL = "/me"
-export const INSIGHTS_URL = "/insights"
-export const LOGIN_URL = "/auth/login"
-export const LOGOUT_URL = "/auth/logout"

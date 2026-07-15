@@ -1,6 +1,6 @@
 import type { Permission } from "@apptypes/user";
 import Result from "@components/atomic/Result";
-import { useCurrentUser } from "@queries";
+import { useCurrentUser } from "@modules/user/core/handlers/useCurrentUser";
 import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
